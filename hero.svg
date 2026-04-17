@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#8bbf9f" stop-opacity="1" />
+      <stop offset="1" stop-color="#d8efe0" stop-opacity="1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#g)" />
+  <g fill="#fff" opacity="0.9">
+    <circle cx="120" cy="120" r="40" />
+    <circle cx="260" cy="200" r="56" />
+    <circle cx="480" cy="90" r="34" />
+  </g>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="rgba(255,255,255,0.12)" font-family="sans-serif" font-size="68">Serene Touch</text>
+</svg>

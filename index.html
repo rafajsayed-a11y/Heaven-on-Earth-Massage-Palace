@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heaven on Earth Massage Palace</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="#">Heaven on Earth Massage Palace</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn-cta" href="#contact">Book Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <h1>Relax. Restore. Renew.</h1>
+            <p>
+              Professional massage therapy in a calm, welcoming space.
+              Experienced therapists, personalized treatments.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" href="#contact">Schedule an Appointment</a>
+              <a class="btn-outline" href="#services">View Services</a>
+            </div>
+          </div>
+          <div class="hero-image" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section id="services" class="section services">
+        <div class="container">
+          <h2>Our Services</h2>
+          <p class="lede">Tailored treatments to fit your needs.</p>
+          <div class="grid cards">
+            <article class="card">
+              <img
+                src="style/assets/service1.svg"
+                alt="Nuru Massage"
+                class="card-illustration"
+              />
+              <h3>Nuru Massage</h3>
+              <p>
+                Gentle, body to body massage, with both parties unclothe and covered with an odorless and colorless massage lotion. often finish with a happy ending.
+              </p>
+            </article>
+            <article class="card">
+              <img
+                src="style/assets/service2.svg"
+                alt="Deep tissue"
+                class="card-illustration"
+              />
+              <h3>Deep Tissue</h3>
+              <p>
+                Focused pressure to release chronic muscle tension and knots.
+              </p>
+            </article>
+            <article class="card">
+              <img
+                src="style/assets/service3.svg"
+                alt="Swedish"
+                class="card-illustration"
+              />
+              <h3>Swedish/h3>
+              <p>Gentle, relaxing strokes to improve circulation and ease
+                tension.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="section pricing">
+        <div class="container">
+          <h2>Pricing</h2>
+          <div class="grid pricing-grid">
+            <div class="price">
+              <h3>60 min</h3>
+              <p class="amount">$200</p>
+            </div>
+            <div class="price">
+              <h3>90 min</h3>
+              <p class="amount">$250</p>
+            </div>
+            <div class="price">
+              <h3>120 min</h3>
+              <p class="amount">$300</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section about">
+        <div class="container">
+          <h2>About Us</h2>
+          <p>
+            Heaven on Earth Massage Palace has provided compassionate, skilled massage therapy
+            since 2021. Our licensed therapists create personalized plans for
+            recovery, relaxation, and ongoing wellness.
+          </p>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact">
+        <div class="container">
+          <h2>Booking (Required)</h2>
+          <p class="lede">
+            Booking is compulsory for all services. Please choose a date and
+            time.
+          </p>
+          <div class="contact-grid">
+            <form class="contact-form" id="booking-form">
+              <label>
+                Your name
+                <input type="text" name="name" required />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" required />
+              </label>
+              <label>
+                Phone
+                <input type="tel" name="phone" required />
+              </label>
+              <label>
+                Service
+                <select name="service" required>
+                  <option value="">Choose a service</option>
+                  <option>Swedish Massage</option>
+                  <option>Deep Tissue</option>
+                  <option>Hot Stone</option>
+                  <option>Nuru</option>
+                  <option>Happy Ending & Others</option>
+                </select>
+              </label>
+              <label>
+                Date
+                <input type="date" name="date" required />
+              </label>
+              <label>
+                Time
+                <input type="time" name="time" required />
+              </label>
+              <label>
+                Notes (optional)
+                <textarea name="notes" rows="4"></textarea>
+              </label>
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">
+                  Book Appointment
+                </button>
+                <a class="btn-outline" href="http://wa.me/14092686596"
+                  >Message on whatsapp: +1 (409) 268-6596</a
+                >
+              </div>
+              <div
+                id="form-message"
+                aria-live="polite"
+                style="margin-top: 10px"
+              ></div>
+            </form>
+            <div class="contact-info">
+              <h3>Book Us</h3>
+              <p>Available for appointments<br /></p>
+              <h3>Hours</h3>
+              <p>Mon–Fri: 7am–11pm<br />Sat: 9am–11pm</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        (function () {
+          const form = document.getElementById("booking-form");
+          const msg = document.getElementById("form-message");
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(form).entries());
+            msg.style.color = "#444";
+            msg.textContent = "Sending booking...";
+            try {
+              const res = await fetch("/.netlify/functions/book", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              });
+              const json = await res.json();
+              if (!res.ok) {
+                msg.style.color = "crimson";
+                msg.textContent =
+                  json && json.error ? json.error : "Booking failed";
+                return;
+              }
+              msg.style.color = "green";
+              msg.textContent =
+                "Booking confirmed. We will contact you shortly.";
+              form.reset();
+            } catch (err) {
+              msg.style.color = "crimson";
+              msg.textContent = "Network error. Please try again later.";
+            }
+          });
+        })();
+      </script>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; 2026 Heaven on Earth Massage Palace — All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
